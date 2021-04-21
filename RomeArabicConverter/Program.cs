@@ -16,22 +16,17 @@ namespace RomeArabicConverter
             {'D', 500},
             {'M', 1000},
         };
-        private static Dictionary<int, char> arabicToRomeDictionary = new Dictionary<int, char>()
-        {
-            {1, 'I'},
-            {5, 'V'},
-            {10, 'X'},
-            {50, 'L'},
-            {100, 'C'},
-            {500, 'D'},
-            {1000, 'M'},
-
-        };
-        private static int maxValueInRome = 1000;
+        private static Dictionary<int, char> arabicToRomeDictionary = new Dictionary<int, char>();
+      
+        private static int maxValueInRome;
         delegate double PowTen();
         static void Main(string[] args)
         {
-
+            foreach (var d in romeToArabicDictionary)
+            {
+                arabicToRomeDictionary.Add(d.Value, d.Key);
+                maxValueInRome = d.Value;
+            }
             Console.WriteLine("Which number system do you want to convert the number to?\n" +
                 " 1: from Arabic to Rome\n" +
                 " 2: from Rome to Arabic");
@@ -39,7 +34,14 @@ namespace RomeArabicConverter
             if (answer == "1")
             {
                 int number = int.Parse(Console.ReadLine());
-                Console.WriteLine(ToRome(number));
+                if (number != 0)
+                {
+                    Console.WriteLine(ToRome(number));
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect expression");
+                }
             }
             else if (answer == "2")
             {
@@ -107,21 +109,14 @@ namespace RomeArabicConverter
                 length = number.ToString().Length;
             }
 
-            while (length != 0)
+            while (number != 0)
             {
                 char smallerChar = arabicToRomeDictionary[(int)Math.Pow(10, length - 1)];
                 char midleChar = arabicToRomeDictionary[5 * (int)Math.Pow(10, length - 1)];
                 char biggerChar = arabicToRomeDictionary[(int)Math.Pow(10, length)];
                 romeStringBuilder.Append(AppendRomeStrings(number, powTen: () => Math.Pow(10, length - 1), smallerChar, midleChar, biggerChar));
-                if (length == 1)
-                {
-                    break;
-                }
-                else
-                {
-                    number %= (int)Math.Pow(10, length - 1);
-                    length = number.ToString().Length;
-                }
+                number %= (int)Math.Pow(10, length - 1);
+                length = number.ToString().Length;
             }
             return romeStringBuilder.ToString();
         }
