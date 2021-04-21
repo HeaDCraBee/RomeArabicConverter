@@ -25,10 +25,9 @@ namespace RomeArabicConverter
             {100, 'C'},
             {500, 'D'},
             {1000, 'M'},
-            {5000, 'Z' },
-            {10000, 'Y' }
+
         };
-        private static int maxValueInRome = 10000;
+        private static int maxValueInRome = 1000;
         delegate double PowTen();
         static void Main(string[] args)
         {
