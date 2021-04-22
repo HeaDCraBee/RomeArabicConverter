@@ -18,6 +18,7 @@ namespace RomeArabicConverter
             Console.WriteLine("Enter number");
             string number = Console.ReadLine();
             Converter.Convert(systemType, number);
+            Console.WriteLine(Converter.Result);
         }
     }
 }
