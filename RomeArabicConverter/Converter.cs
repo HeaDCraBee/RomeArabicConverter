@@ -6,29 +6,30 @@ using System.Threading.Tasks;
 
 namespace RomeArabicConverter
 {
-    class Converter
+    public class Converter
     {
         delegate double PowTen();
-
+        static string result;
         public static void Convert(string systemType, string number)
         {
+            
             if (systemType == "1")
             {
-                Console.WriteLine(ToRome(int.Parse(number)));
+                Result = ToRome(int.Parse(number));
             }
             else if (systemType == "2")
             {
-                Console.WriteLine(ToArabic(number.ToCharArray()));
+                Result = ToArabic(number.ToCharArray()).ToString();
             }
         }
+
+        public static string Result { get; private set; }
+        
         
 
         static int ToArabic(char[] number)
         {
             var romeToArabicDictionary = RomeToArabicDictionary.getRTADictionary();
-            int res = romeToArabicDictionary[number[number.Length - 1]];
-            bool isLover = false;
-            int bigger = 0;
             foreach (var chars in number)
             {
                 if (!romeToArabicDictionary.ContainsKey(chars))
@@ -36,6 +37,10 @@ namespace RomeArabicConverter
                     throw new ArgumentException("Incorrect sentence");
                 }
             }
+            int res = romeToArabicDictionary[number[number.Length - 1]];
+            bool isLover = false;
+            int bigger = 0;
+            
             /*
              * Начиная с конца строки начинает перевод из римских в арабские(справа на лево)
              * Если раньше встретилось число больше, то нынешнее число вычитается из текущего значения res.
