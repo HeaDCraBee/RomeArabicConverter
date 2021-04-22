@@ -9,7 +9,6 @@ namespace RomeArabicConverter
     public class Converter
     {
         delegate double PowTen();
-        static string result;
         public static void Convert(string systemType, string number)
         {
             
