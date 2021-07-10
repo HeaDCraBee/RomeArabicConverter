@@ -5,7 +5,7 @@ namespace RomeArabicConverter
 {
     class RomeToArabicDictionary
     {
-        static Dictionary<char, int> rTADictionary = new Dictionary<char, int>()
+        private static Dictionary<char, int> s_romeToArabic = new Dictionary<char, int>()
         {
             {'I', 1},
             {'V', 5},
@@ -16,9 +16,9 @@ namespace RomeArabicConverter
             {'M', 1000},
         };
 
-        public static Dictionary<char, int> getRTADictionary()
+        public static Dictionary<char, int> getRomeToArabicDictionary()
         {
-            return rTADictionary;
+            return s_romeToArabic;
         }
     }
 
